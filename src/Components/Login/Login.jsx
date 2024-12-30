@@ -8,8 +8,9 @@ import './Login.css';
 
 function Login() {
 
-  const [email,setEmail] = useState(' ')
-  const [password,setPassword] = useState(' ')
+
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
 
   const {auth} = useContext(FirebaseContext)
   const navigate = useNavigate()
@@ -68,7 +69,7 @@ function Login() {
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <a href='/signup'>Signup</a>
       </div>
     </div>
   );

@@ -12,6 +12,8 @@ import { doc, getDoc } from "firebase/firestore";
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
+import Create from './Pages/Create.jsx'
+
 
 function App() {
 
@@ -21,13 +23,12 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        // Fetch user data from Firestore
         const userDocRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setUser(userData); // Update the AuthContext with Firestore data
+          setUser(userData);
         } else {
           console.log("No such user document!");
         }
@@ -45,6 +46,7 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/signup' element={<Signup/>} />
           <Route path='/login' element={<Login/>}/>
+          <Route path='/create' element={<Create/>}/>
         </Routes>
       </BrowserRouter>
     </div>

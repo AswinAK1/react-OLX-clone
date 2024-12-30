@@ -6,11 +6,14 @@ import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
-import { AuthContext } from '../../store/Context';
-function Header() {
+import { AuthContext, FirebaseContext } from '../../store/Context';
+import {useNavigate} from 'react-router-dom'
 
+
+function Header() {
+    const navigate = useNavigate()
     const {user} = useContext(AuthContext)
-    console.log("User in Header:", user);
+    const {auth} = useContext(FirebaseContext)
 
   return (
     <div className="headerParentDiv">
@@ -39,15 +42,18 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-        <span>{user && user.userName ? user.userName : "Login"}</span>
+        {<span onClick={()=>navigate('/login')}>{user && user.userName ? user.userName : "Login"}</span>}
           <hr />
         </div>
+        {user && <span onClick={()=> {auth.signOut();
+          navigate('/login')
+        }}>Log Out</span>}
 
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
-            <span>SELL</span>
+            <span onClick={()=>navigate('/create')}>SELL</span>
           </div>
         </div>
       </div>

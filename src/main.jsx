@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import firebase from './Firebase/Config'
+import firebase from './Firebase/Config.jsx'
 import './index.css'
 import Context,{FirebaseContext } from './store/Context.jsx'
 
